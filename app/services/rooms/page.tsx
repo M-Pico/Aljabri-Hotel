@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import { useLanguage, translateMessage } from "../../components/LanguageProvider";
 
 const services = [
   { id: "cleaning", title: "طلب تنظيف الغرفة", description: "تنظيف وترتيب الغرفة", icon: "✦" },
@@ -10,6 +11,7 @@ const services = [
 ];
 
 export default function RoomsPage() {
+  const { language } = useLanguage();
   const [selected, setSelected] = useState("cleaning");
   const [details, setDetails] = useState("");
   const [quantity, setQuantity] = useState("1");
@@ -18,12 +20,12 @@ export default function RoomsPage() {
 
   function submitRequest() {
     if (!room.trim()) {
-      alert("يرجى إدخال رقم الغرفة");
+      alert(translateMessage(language, "يرجى إدخال رقم الغرفة"));
       return;
     }
 
     if (!details.trim()) {
-      alert("يرجى تحديد تفاصيل الطلب");
+      alert(translateMessage(language, "يرجى تحديد تفاصيل الطلب"));
       return;
     }
 
@@ -42,7 +44,7 @@ export default function RoomsPage() {
     const previous = JSON.parse(localStorage.getItem("hotelRequests") || "[]");
     localStorage.setItem("hotelRequests", JSON.stringify([...previous, request]));
 
-    alert("تم حفظ طلبك تجريبيًا بنجاح");
+    alert(translateMessage(language, "تم حفظ طلبك تجريبيًا بنجاح"));
     setDetails("");
     setQuantity("1");
     setNotes("");
@@ -72,7 +74,7 @@ export default function RoomsPage() {
                 className="h-full w-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#172E29]/70 to-transparent" />
-              <div className="absolute bottom-7 right-7 text-white">
+              <div className="absolute bottom-7 end-7 text-white">
                 <p className="mb-2 text-xs tracking-[3px] text-white/70">YOUR COMFORT</p>
                 <h2 className="text-2xl font-bold md:text-3xl">راحتكم في أدق التفاصيل</h2>
               </div>
@@ -91,7 +93,7 @@ export default function RoomsPage() {
                       setSelected(service.id);
                       setDetails("");
                     }}
-                    className={`rounded-2xl border p-5 text-right transition ${
+                    className={`rounded-2xl border p-5 text-start transition ${
                       selected === service.id
                         ? "border-[#234C45] bg-[#F0F3ED]"
                         : "border-[#E8DED0] hover:border-[#A8B9A5]"

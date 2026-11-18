@@ -106,7 +106,7 @@ export default function MyOrdersPage() {
               className="inline-flex items-center justify-center gap-3 border border-[#234C45] px-5 py-3 text-sm font-semibold text-[#234C45] transition hover:bg-[#234C45] hover:text-white"
             >
               طلب خدمة جديدة
-              <span>←</span>
+              <span className="directional-arrow">←</span>
             </Link>
           </div>
 
@@ -137,7 +137,7 @@ export default function MyOrdersPage() {
                     </p>
                   </div>
 
-                  <div className="border-t border-[#E8DED0] pt-4 text-sm text-[#77766F] md:border-r md:border-t-0 md:pr-8 md:pt-0">
+                  <div className="border-t border-[#E8DED0] pt-4 text-sm text-[#77766F] md:border-s md:border-t-0 md:ps-8 md:pt-0">
                     <p className="mb-2">{order.date}</p>
                     <p>{order.time}</p>
                   </div>
@@ -164,7 +164,7 @@ export default function MyOrdersPage() {
             className="inline-flex items-center gap-4 border border-[#A8B9A5] px-7 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-[#234C45]"
           >
             تواصل معنا
-            <span>←</span>
+            <span className="directional-arrow">←</span>
           </Link>
         </div>
 

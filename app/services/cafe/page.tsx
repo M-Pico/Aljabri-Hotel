@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import { useLanguage, translateMessage } from "../../components/LanguageProvider";
 
 const products = [
   {
@@ -55,6 +56,7 @@ const products = [
 ];
 
 export default function CafePage() {
+  const { language } = useLanguage();
   const [cart, setCart] = useState<{ [key: number]: number }>({});
   const [room, setRoom] = useState("");
   const [delivery, setDelivery] = useState("إلى الغرفة");
@@ -91,12 +93,12 @@ export default function CafePage() {
 
   function submitOrder() {
     if (!room.trim()) {
-      alert("يرجى إدخال رقم الغرفة");
+      alert(translateMessage(language, "يرجى إدخال رقم الغرفة"));
       return;
     }
 
     if (totalItems === 0) {
-      alert("يرجى إضافة منتجات إلى السلة");
+      alert(translateMessage(language, "يرجى إضافة منتجات إلى السلة"));
       return;
     }
 
@@ -119,7 +121,7 @@ export default function CafePage() {
     const previous = JSON.parse(localStorage.getItem("hotelRequests") || "[]");
     localStorage.setItem("hotelRequests", JSON.stringify([...previous, order]));
 
-    alert("تم حفظ طلب الكافيه تجريبيًا بنجاح");
+    alert(translateMessage(language, "تم حفظ طلب الكافيه تجريبيًا بنجاح"));
     setCart({});
     setNotes("");
   }
@@ -146,7 +148,7 @@ export default function CafePage() {
             className="h-[280px] w-full object-cover md:h-[380px]"
           />
           <div className="absolute inset-0 bg-gradient-to-l from-[#172E29]/80 via-[#172E29]/30 to-transparent" />
-          <div className="absolute bottom-8 right-7 text-white md:bottom-14 md:right-14">
+          <div className="absolute bottom-8 end-7 text-white md:bottom-14 md:end-14">
             <p className="mb-3 text-xs tracking-[4px] text-white/70">A MOMENT TO ENJOY</p>
             <h2 className="mb-3 text-3xl font-bold md:text-5xl">
               مذاق يرافق إقامتك
@@ -201,7 +203,7 @@ export default function CafePage() {
                   alt={product.name}
                   className="h-full w-full object-cover transition duration-500 hover:scale-105"
                 />
-                <span className="absolute right-4 top-4 rounded-full bg-white/95 px-4 py-2 text-xs font-semibold text-[#234C45]">
+                <span className="absolute end-4 top-4 rounded-full bg-white/95 px-4 py-2 text-xs font-semibold text-[#234C45]">
                   {product.category}
                 </span>
               </div>

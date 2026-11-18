@@ -2,8 +2,10 @@
 "use client";
 
 import { useState } from "react";
+import { useLanguage, translateMessage } from "../../components/LanguageProvider";
 
 export default function WifiPage() {
+  const { language } = useLanguage();
   const [copied, setCopied] = useState(false);
 
   const wifiName = "Aljabri_Hotel";
@@ -16,7 +18,7 @@ export default function WifiPage() {
       window.setTimeout(() => setCopied(false), 2500);
     } catch {
       setCopied(false);
-      alert("تعذر نسخ كلمة المرور. يرجى نسخها يدويًا.");
+      alert(translateMessage(language, "تعذر نسخ كلمة المرور. يرجى نسخها يدويًا."));
     }
   }
 
@@ -37,8 +39,8 @@ export default function WifiPage() {
 
         <div className="overflow-hidden rounded-[30px] bg-white shadow-[0_15px_50px_rgba(35,76,69,0.08)] md:grid md:grid-cols-2">
           <div className="relative flex min-h-[280px] flex-col items-center justify-center overflow-hidden bg-[#234C45] px-8 py-12 text-center text-white">
-            <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full border border-white/10" />
-            <div className="absolute -bottom-24 -left-16 h-64 w-64 rounded-full border border-white/10" />
+            <div className="absolute -end-16 -top-16 h-56 w-56 rounded-full border border-white/10" />
+            <div className="absolute -bottom-24 -start-16 h-64 w-64 rounded-full border border-white/10" />
 
             <div className="relative mb-7 flex h-28 w-28 items-center justify-center rounded-full border border-white/20 bg-white/10">
               <svg

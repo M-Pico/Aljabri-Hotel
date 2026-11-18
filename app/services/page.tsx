@@ -87,7 +87,7 @@ export default function ServicesPage() {
                                     aria-label={service.title}
                                 />
                                 <div className="absolute inset-0 bg-black/5 transition-colors duration-500 group-hover:bg-black/15" />
-                                <span className="absolute bottom-5 right-5 text-sm font-medium tracking-widest text-white">
+                                <span className="absolute bottom-5 end-5 text-sm font-medium tracking-widest text-white">
                                     {service.number} / 06
                                 </span>
                             </div>
@@ -109,7 +109,7 @@ export default function ServicesPage() {
                                         className="flex items-center justify-between text-sm font-semibold text-[#234C45] transition-colors duration-300 hover:text-[#A8B9A5]"
                                     >
                                         <span>اكتشف الخدمة</span>
-                                        <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#A8B9A5] text-lg transition-all duration-300 group-hover:bg-[#234C45] group-hover:text-white group-hover:border-[#234C45]">
+                                        <span className="directional-arrow flex h-9 w-9 items-center justify-center rounded-full border border-[#A8B9A5] text-lg transition-all duration-300 group-hover:bg-[#234C45] group-hover:text-white group-hover:border-[#234C45]">
                                             ←
                                         </span>
                                     </Link>
@@ -135,7 +135,7 @@ export default function ServicesPage() {
                         className="inline-flex items-center gap-5 border border-[#A8B9A5] px-8 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-white hover:text-[#234C45]"
                     >
                         تواصل معنا
-                        <span>←</span>
+                        <span className="directional-arrow">←</span>
                     </Link>
                 </section>
 

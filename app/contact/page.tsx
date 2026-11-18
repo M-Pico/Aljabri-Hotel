@@ -163,7 +163,7 @@ export default function ContactPage() {
                 className="group flex w-full items-center justify-center gap-4 rounded-xl bg-[#234C45] px-6 py-4 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#193A34]"
               >
                 إرسال الرسالة
-                <span className="text-lg transition-transform duration-300 group-hover:-translate-x-1">
+                <span className="directional-arrow text-lg">
                   ←
                 </span>
               </button>

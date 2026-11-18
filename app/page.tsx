@@ -48,7 +48,7 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-black/45" />
 
         <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-24 md:px-12">
-          <div className="max-w-2xl text-right">
+          <div className="max-w-2xl text-start">
 
             <p className="mb-6 text-xs font-medium tracking-[4px] text-[#DDE5D8] md:text-sm">
               مرحبًا بكم في فندق الجابري
@@ -73,7 +73,7 @@ export default function HomePage() {
                 className="inline-flex items-center gap-4 bg-white px-7 py-4 text-sm font-bold text-[#234C45] transition duration-300 hover:bg-[#E8DED0]"
               >
                 اكتشف خدماتنا
-                <span>←</span>
+                <span className="directional-arrow">←</span>
               </Link>
 
               {roomNumber && (
@@ -92,7 +92,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-8 hidden items-center gap-3 text-xs tracking-widest text-white/80 md:flex">
+        <div className="absolute bottom-8 start-8 hidden items-center gap-3 text-xs tracking-widest text-white/80 md:flex">
           <span className="h-px w-12 bg-white/70" />
           AL JABRI HOTEL
         </div>
@@ -119,7 +119,7 @@ export default function HomePage() {
               className="group inline-flex items-center gap-3 text-sm font-semibold text-[#234C45]"
             >
               جميع الخدمات
-              <span className="transition-transform duration-300 group-hover:-translate-x-2">
+              <span className="directional-arrow">
                 ←
               </span>
             </Link>
@@ -140,7 +140,7 @@ export default function HomePage() {
                     }}
                   />
 
-                  <span className="absolute bottom-4 right-5 text-sm tracking-widest text-white">
+                    <span className="absolute bottom-4 end-5 text-sm tracking-widest text-white">
                     {service.number}
                   </span>
                 </div>
@@ -158,7 +158,7 @@ export default function HomePage() {
                     <span>اكتشف الخدمة</span>
 
                     <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#A8B9A5] transition-all duration-300 group-hover:border-[#234C45] group-hover:bg-[#234C45] group-hover:text-white">
-                      ←
+                      <span className="directional-arrow">←</span>
                     </span>
                   </div>
                 </div>
@@ -171,7 +171,7 @@ export default function HomePage() {
 
       {/* قسم متابعة الطلبات */}
       <section className="px-6 py-20 md:px-12 md:py-24">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-8 rounded-[45px] bg-[#234C45] px-8 py-14 text-center md:flex-row md:px-16 md:text-right">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-8 rounded-[45px] bg-[#234C45] px-8 py-14 text-center md:flex-row md:px-16 md:text-start">
 
           <div>
             <p className="mb-4 text-xs tracking-[3px] text-[#A8B9A5]">
@@ -194,7 +194,7 @@ export default function HomePage() {
           >
             متابعة طلباتي
 
-            <span className="transition-transform duration-300 group-hover:-translate-x-2">
+            <span className="directional-arrow">
               ←
             </span>
           </Link>

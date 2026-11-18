@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+import { useLanguage, translateMessage } from "../../components/LanguageProvider";
 
 const laundryServices = [
   { id: 1, name: "غسيل قطعة ملابس", description: "غسيل وتنظيف الملابس", price: 8 },
@@ -12,6 +13,7 @@ const laundryServices = [
 ];
 
 export default function LaundryPage() {
+  const { language } = useLanguage();
   const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
   const [room, setRoom] = useState("");
   const [notes, setNotes] = useState("");
@@ -32,12 +34,12 @@ export default function LaundryPage() {
 
   function submitRequest() {
     if (!room.trim()) {
-      alert("يرجى إدخال رقم الغرفة");
+      alert(translateMessage(language, "يرجى إدخال رقم الغرفة"));
       return;
     }
 
     if (totalItems === 0) {
-      alert("يرجى اختيار خدمة واحدة على الأقل");
+      alert(translateMessage(language, "يرجى اختيار خدمة واحدة على الأقل"));
       return;
     }
 
@@ -59,7 +61,7 @@ export default function LaundryPage() {
     const previous = JSON.parse(localStorage.getItem("hotelRequests") || "[]");
     localStorage.setItem("hotelRequests", JSON.stringify([...previous, request]));
 
-    alert("تم حفظ طلب المغسلة تجريبيًا بنجاح");
+    alert(translateMessage(language, "تم حفظ طلب المغسلة تجريبيًا بنجاح"));
     setQuantities({});
     setNotes("");
   }
@@ -87,7 +89,7 @@ export default function LaundryPage() {
               className="absolute inset-0 h-full w-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#172E29]/80 to-transparent" />
-            <div className="absolute bottom-8 right-8 text-white">
+            <div className="absolute bottom-8 end-8 text-white">
               <p className="mb-3 text-xs tracking-[3px] text-white/70">CARE & ELEGANCE</p>
               <h2 className="text-3xl font-bold">أناقتك تستحق العناية</h2>
             </div>
@@ -136,7 +138,7 @@ export default function LaundryPage() {
                       </p>
                       <p className="mt-2 text-sm font-bold text-[#234C45]">
                         {service.price} ر.س
-                        <span className="mr-1 text-xs font-normal text-[#89877F]">/ للقطعة</span>
+                        <span className="ms-1 text-xs font-normal text-[#89877F]">/ للقطعة</span>
                       </p>
                     </div>
                   </div>
