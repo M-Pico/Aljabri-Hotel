@@ -1,6 +1,7 @@
 
 "use client";
 
+import { Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
@@ -28,8 +29,8 @@ const services = [
   },
 ];
 
-export default function HomePage() {
-  const searchParams = useSearchParams();
+function HomePageContent() {
+    const searchParams = useSearchParams();
   const roomNumber = searchParams.get("room");
 
   return (
@@ -203,5 +204,12 @@ export default function HomePage() {
       </section>
 
     </main>
+  );
+}
+export default function HomePage() {
+  return (
+    <Suspense fallback={<main className="min-h-screen bg-[#F7F4ED]" />}>
+      <HomePageContent />
+    </Suspense>
   );
 }
