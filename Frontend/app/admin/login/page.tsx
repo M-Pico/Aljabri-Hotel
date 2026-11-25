@@ -1,0 +1,12 @@
+"use client";
+import { FormEvent,useState } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { API_URL,TOKEN_KEY,USER_KEY } from "../admin-auth";
+
+export default function AdminLogin(){
+ const router=useRouter();const [email,setEmail]=useState("");const [password,setPassword]=useState("");const [error,setError]=useState("");const [loading,setLoading]=useState(false);
+ async function submit(e:FormEvent<HTMLFormElement>){e.preventDefault();setError("");setLoading(true);try{const r=await fetch(`${API_URL}/login`,{method:"POST",headers:{Accept:"application/json","Content-Type":"application/json"},body:JSON.stringify({email,password})});const data=await r.json().catch(()=>null);if(!r.ok||!data?.token)throw Error(data?.message||"تعذر تسجيل الدخول، تحقق من البيانات");localStorage.setItem(TOKEN_KEY,data.token);localStorage.setItem(USER_KEY,JSON.stringify(data.user));router.replace("/admin")}catch(x){setError(x instanceof Error?x.message:"تعذر الاتصال بالخادم")}finally{setLoading(false)}}
+ return <main dir="rtl" className="admin-login"><section className="login-card"><div className="mb-8 flex justify-center"><Image src="/logo-black.png" alt="فندق الجابري" width={150} height={100} priority className="h-auto w-[150px] object-contain"/></div><p className="eyebrow text-center">AL JABRI HOTEL · الإدارة</p><h1 className="text-center">مرحبًا بعودتك</h1><p className="login-copy text-center">سجّل الدخول لمتابعة عمليات الفندق وإدارة خدماته.</p>
+ <form onSubmit={submit} className="space-y-5"><label className="block">البريد الإلكتروني<input type="email" autoComplete="off" required value={email} onChange={e=>setEmail(e.target.value)} placeholder="name@aljabrihotel.com"/></label><label className="block">كلمة المرور<input type="password" autoComplete="off" required value={password} onChange={e=>setPassword(e.target.value)} placeholder="أدخل كلمة المرور"/></label>{error&&<p role="alert" className="admin-error">{error}</p>}<button type="submit" disabled={loading} className="admin-primary login-submit w-full" style={{backgroundColor:"#234C45",color:"#FFFFFF",width:"100%",minHeight:52}}>{loading?"جارٍ التحقق…":"تسجيل الدخول"}</button></form><p className="login-foot">فندق الجابري · بوابة الإدارة</p></section><aside className="login-art"><div><span>AL JABRI</span><h2>ضيافة تليق<br/>بكم.</h2><p>إدارة راقية لتجربة ضيافة استثنائية</p></div></aside></main>
+}
