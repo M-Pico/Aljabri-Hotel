@@ -1,5 +1,9 @@
 
+"use client";
+import { useState, type FormEvent } from "react";
 export default function ContactPage() {
+  const [sending,setSending]=useState(false); const [notice,setNotice]=useState("");
+  async function send(event:FormEvent<HTMLFormElement>){event.preventDefault();setSending(true);setNotice("");const form=new FormData(event.currentTarget);const payload={name:String(form.get("name")||""),phone:String(form.get("phone")||""),email:String(form.get("email")||"")||null,subject:String(form.get("subject")||""),message:String(form.get("message")||"")};try{const api=(process.env.NEXT_PUBLIC_API_URL||"http://127.0.0.1:8000/api").replace(/\/$/,"");const response=await fetch(`${api}/contact`,{method:"POST",headers:{Accept:"application/json","Content-Type":"application/json"},body:JSON.stringify(payload)});const data=await response.json().catch(()=>null);if(!response.ok)throw Error(data?.message||"تعذر إرسال الرسالة");setNotice("وصلتنا رسالتكم بنجاح، شكرًا لتواصلكم.");event.currentTarget.reset()}catch(e){setNotice(e instanceof Error?e.message:"تعذر الاتصال بالخادم")}finally{setSending(false)}}
   return (
     <main className="min-h-screen bg-[#F7F4ED] px-5 py-16 md:px-10 md:py-20">
       <div className="mx-auto max-w-6xl">
@@ -89,7 +93,7 @@ export default function ContactPage() {
               يرجى تعبئة البيانات التالية وسنسعد بالتواصل معكم.
             </p>
 
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={send}>
 
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 <div>
@@ -97,6 +101,7 @@ export default function ContactPage() {
                     الاسم الكامل
                   </label>
                   <input
+                    name="name"
                     type="text"
                     placeholder="أدخل اسمك"
                     required
@@ -109,6 +114,7 @@ export default function ContactPage() {
                     رقم الغرفة
                   </label>
                   <input
+                    name="phone"
                     type="text"
                     placeholder="رقم الغرفة (اختياري)"
                     className="w-full rounded-xl border border-[#E8DED0] bg-[#F7F4ED] px-4 py-4 text-sm text-[#234C45] outline-none transition focus:border-[#A8B9A5] focus:bg-white"
@@ -120,7 +126,8 @@ export default function ContactPage() {
                 <label className="mb-3 block text-sm font-semibold text-[#234C45]">
                   البريد الإلكتروني
                 </label>
-                <input
+                  <input
+                    name="email"
                   type="email"
                   placeholder="example@email.com"
                   required
@@ -133,6 +140,7 @@ export default function ContactPage() {
                   موضوع الرسالة
                 </label>
                 <select
+                  name="subject"
                   required
                   defaultValue=""
                   className="w-full rounded-xl border border-[#E8DED0] bg-[#F7F4ED] px-4 py-4 text-sm text-[#234C45] outline-none transition focus:border-[#A8B9A5] focus:bg-white"
@@ -151,6 +159,7 @@ export default function ContactPage() {
                   نص الرسالة
                 </label>
                 <textarea
+                  name="message"
                   rows={5}
                   required
                   placeholder="اكتب رسالتك هنا..."
@@ -158,11 +167,13 @@ export default function ContactPage() {
                 />
               </div>
 
+              {notice&&<p role="status" className="text-sm text-[#234C45]">{notice}</p>}
               <button
                 type="submit"
+                disabled={sending}
                 className="group flex w-full items-center justify-center gap-4 rounded-xl bg-[#234C45] px-6 py-4 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#193A34]"
               >
-                إرسال الرسالة
+                {sending?"جارٍ الإرسال…":"إرسال الرسالة"}
                 <span className="directional-arrow text-lg">
                   ←
                 </span>
