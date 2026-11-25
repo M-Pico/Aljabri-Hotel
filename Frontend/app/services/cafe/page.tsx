@@ -14,7 +14,8 @@ const imageByName: Record<string, string> = {
   "كوكيز": "/cookies.png",
 };
 const otherCafeImages = ["https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=1200&q=85", "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=1200&q=85"];
-type CafeProduct = GuestService & { image: string; category: string };
+type CafeCategory = "مشروبات ساخنة" | "مشروبات باردة" | "مأكولات";
+type CafeProduct = Omit<GuestService, "category"> & { image: string; category: CafeCategory };
 
 export default function CafePage() {
   const { language } = useLanguage();
