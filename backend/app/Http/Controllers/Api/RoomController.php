@@ -1,0 +1,4 @@
+<?php
+namespace App\Http\Controllers\Api;
+use App\Http\Controllers\Controller; use App\Models\Room; use Illuminate\Http\Request;
+class RoomController extends Controller { public function index(){return Room::latest()->get();} public function store(Request $r){$d=$r->validate(['room_number'=>'required|string|max:30|unique:rooms','room_type'=>'required|in:مفردة,مزدوجة,جناح','status'=>'sometimes|string','qr_code'=>'nullable|string']);return Room::create($d);} public function show(Room $room){return $room;} public function update(Request $r,Room $room){$d=$r->validate(['room_number'=>'sometimes|string|max:30|unique:rooms,room_number,'.$room->id,'room_type'=>'sometimes|in:مفردة,مزدوجة,جناح','status'=>'sometimes|string','qr_code'=>'nullable|string']);$room->update($d);return $room;} public function destroy(Room $room){$room->delete();return response()->noContent();}}
